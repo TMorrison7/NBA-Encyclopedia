@@ -1,0 +1,104 @@
+{% extends 'Encyclopedia/default.html' %}
+{% csrf_token %}
+{% block content %}
+
+
+
+    {% if seasonrecords.image %}
+        <img src="{{ seasonrecords.image.url }}" height="200" width="200">
+    {% endif %}
+        <h1 class='posttitle loader'>{{ seasonrecords.name }}</h1>
+    {% if seasonrecords.is_verified == True %}
+        <span class="glyphicon glyphicon-check"></span>
+    {% endif %}
+
+    {% if seasonrecords.season_league %}
+        <h3>{{ seasonrecords.season_league }}</h3>
+    {% endif %}
+    {% if seasonrecords.season_duration %}
+        <h3>{{ seasonrecords.season_duration }}</h3>
+    {% endif %}
+    {% if seasonrecords.season_not %}
+        <h3>{{ seasonrecords.season_not }}</h3>
+    {% endif %}
+    {% if seasonrecords.season_bio %}
+        <p class='postcontent' >{{ seasonrecords.season_bio|safe|linebreaksbr }}</p>
+    {% endif %}
+    {% if seasonrecords.season_allteams %}
+        <h3>{{ seasonrecords.season_allteams }}</h3>
+    {% endif %}
+    {% if seasonrecords.season_mvp %}
+        <h3>{{ seasonrecords.season_mvp }}</h3>
+    {% endif %}
+    {% if seasonrecords.season_roy %}
+        <h3>{{ seasonrecords.season_roy }}</h3>
+    {% endif %}
+    {% if seasonrecords.season_doy %}
+        <h3>{{ seasonrecords.season_doy }}</h3>
+    {% endif %}
+    {% if seasonrecords.season_smoy %}
+        <h3>{{ seasonrecords.season_smoy }}</h3>
+    {% endif %}
+    {% if seasonrecords.season_mip %}
+        <h3>{{ seasonrecords.season_mip }}</h3>
+    {% endif %}
+    {% if seasonrecords.season_coy %}
+        <h3>{{ seasonrecords.season_coy }}</h3>
+    {% endif %}
+    {% if seasonrecords.season_champion %}
+        <h3>{{ seasonrecords.season_champion }}</h3>
+    {% endif %}
+    {% if seasonrecords.season_fmvp %}
+        <h3>{{ seasonrecords.season_fmvp}}</h3>
+    {% endif %}
+
+
+
+
+
+     {% if user.is_authenticated and user == seasonrecords.author %}
+         <a class="btn btn-primary" href="{% url 'NBAE:updateseason' pk=seasonrecords.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+         <a class="btn btn-primary" href="{% url 'NBAE:confirmseason' pk=seasonrecords.pk %}"><span class="glyphicon glyphicon-trash"></span></a>
+     {% endif %}
+
+
+    {%  if seasonrecords.published_date %}
+            <div class="date postdate">
+                <p>"Published: "{{ seasonrecords.published_date }}</p>
+            </div>
+
+        {% else %}
+            <a class="btn btn-default" href="{% url 'NBAE:seasonrecord_publish' pk=seasonrecords.pk %}">Publish</a>
+        {% endif %}
+    {% if seasonrecords.created_date and user == seasonrecords.author %}
+            <div class="date postdate">
+                <p>"Date Created: "{{ seasonrecords.created_date }}</p>
+            </div>
+    {% endif %}
+
+
+{% if seasonrecords.is_draft == False %}
+  <hr>
+    <a class="btn btn-primary btn-comment" href="{% url 'NBAE:add_comment_to_record' pk=seasonrecords.pk %}">Add comment</a>
+  <div class="container">
+
+
+   {% for comment in seasonrecords.comments.all %}
+  <br>
+      <p>{{ comment.text|safe|linebreaks }}</p>
+       {% if comment.author.userprofile.image %}
+          <p>Posted by: <strong><img src="{{ comment.author.userprofile.image.url }}" width="50" height="50">{{ comment.author }}</strong></p>
+       {% else %}
+            <p>Posted by: <strong>{{comment.author }}</strong></p>
+       {% endif %}
+            {{ comment.created_date }}
+      {% if user.is_authenticated and user == comment.author or comment.approved_comment and user == comment.author  %}
+            <a class="btn btn-default" href="{% url 'NBAE:comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+      {% endif %}
+  {% empty %}
+      <p>No comments posted.</p>
+  {% endfor %}
+  {% endif %}
+</div>
+
+{% endblock %}

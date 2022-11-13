@@ -1,0 +1,28 @@
+{% extends 'Encyclopedia/default.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <style>
+        .jumbotron{
+            background-color: #17408b;
+            color: white;
+        }
+    </style>
+   <div class="jumbotron">
+    <h1>Edit Profile</h1>
+
+    <form method="POST" enctype="multipart/form-data" class="post-form">
+    {% csrf_token %}
+    {{ profile_form.image| as_crispy_field }}
+    {{ profile_form.first_name | as_crispy_field }}
+    {{ profile_form.last_name | as_crispy_field }}
+    {{ profile_form.age | as_crispy_field }}
+    {{ profile_form.hometown | as_crispy_field }}
+    {{ profile_form.bio | as_crispy_field }}
+
+    <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+    <a href="{% url 'NBAE:profile_view' %}">Didn't change anything? Click here</a>
+
+    <script>var editor = new MediumEditor('.editable');</script>
+   </div>
+{% endblock %}

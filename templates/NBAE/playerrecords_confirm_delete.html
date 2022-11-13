@@ -1,0 +1,7 @@
+{% extends 'Encyclopedia/default.html' %}
+{% block content %}
+  <form action="{% url 'NBAE:deleteplayer' pk %}" method="/post/">{% csrf_token %}
+    <p class="btn btn-default" href="{% url 'NBAE:confirmplayer' pk %}">Are you sure you want to delete "{{ player }}"?</p>
+    <input class='btn btn-danger' type="submit" value="Confirm" />
+  </form>
+{% endblock %}

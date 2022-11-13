@@ -1,0 +1,88 @@
+{% extends 'Encyclopedia/default.html' %}
+{% csrf_token %}
+{% block content %}
+
+
+    {% if playerrecords.image %}
+        <img src="{{ playerrecords.image.url }}">
+    {% endif %}
+        <h1 class='posttitle loader'>{{ playerrecords.name }}</h1>
+    {% if playerrecords.is_verified == True %}
+        <span class="glyphicon glyphicon-check"></span>
+    {% endif %}
+    {% if playerrecords.player_dob %}
+        <h3>{{ playerrecords.player_dob }}</h3>
+    {% endif %}
+    {% if playerrecords.player_birthplace %}
+        <h3>{{ playerrecords.player_birthplace }}</h3>
+    {% endif %}
+    {% if playerrecords.player_nationality %}
+        <h3>{{ playerrecords.player_nationality }}</h3>
+    {% endif %}
+    {% if playerrecords.player_highschool %}
+        <h3>{{ playerrecords.player_highschool}}</h3>
+    {% endif %}
+    {% if playerrecords.player_college %}
+        <h3>{{ playerrecords.player_college }}</h3>
+    {% endif %}
+    {% if playerrecords.player_currentteam %}
+        <h3>{{ playerrecords.player_currentteam }}</h3>
+    {% endif %}
+    {% if playerrecords.player_allteams %}
+        <h3>{{ playerrecords.player_allteams }}</h3>
+    {% endif %}
+    {% if playerrecords.player_bio %}
+        <p class='postcontent' >{{ playerrecords.player_bio|safe|linebreaksbr }}</p>
+    {% endif %}
+    {% if playerrecords.player_profile %}
+        <h3>{{ playerrecords.player_profile }}</h3>
+    {% endif %}
+    {% if playerrecords.player_accolades %}
+        <h3>{{ playerrecords.player_accolades }}</h3>
+    {% endif %}
+    {% if playerrecords.player_references %}
+        <h3>{{ playerrecords.player_references }}</h3>
+    {% endif %}
+
+
+        {% if playerrecords.published_date %}
+            <div class="date postdate">
+                {{ playerrecords.published_date }}
+            </div>
+
+        {% else %}
+            <a class="btn btn-default" href="{% url 'NBAE:playerrecord_publish' pk=playerrecords.pk %}">Publish</a>
+        {% endif %}
+
+
+    <p class='postcontent' >{{ playerrecords.author|safe|linebreaksbr }}</p>
+
+     {% if user.is_authenticated and user == playerrecords.author%}
+         <a class="btn btn-primary" href="{% url 'NBAE:updateplayer' pk=playerrecords.pk %}"><span class="f"></span></a>
+         <a class="btn btn-primary" href="{% url 'NBAE:confirmplayer' pk=playerrecords.pk %}"><span class="glyphicon glyphicon-trash"></span></a>
+      {% endif %}
+
+  <hr>
+    <a class="btn btn-primary btn-comment" href="{% url 'NBAE:add_comment_to_record' pk=playerrecords.pk %}">Comment</a>
+  <div class="container">
+  {% if playerrecords.is_draft == False %}
+
+   {% for comment in playerrecords.comments.all %}
+  <br>
+          <p>{{ comment.text|safe|linebreaks }}</p>
+       {% if comment.author.userprofile.image %}
+          <p>Posted by: <strong><img src="{{ comment.author.userprofile.image.url }}" width="50" height="50">{{ comment.author }}</strong></p>
+       {% else %}
+            <p>Posted by: <strong>{{comment.author }}</strong></p>
+       {% endif %}
+            {{ comment.created_date }}
+      {% if user.is_authenticated and user == comment.author or comment.approved_comment and user == comment.author  %}
+            <a class="btn btn-default" href="{% url 'NBAE:comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+      {% endif %}
+  {% empty %}
+      <p>No comments posted.</p>
+  {% endfor %}
+  {% endif %}
+</div>
+
+{% endblock %}

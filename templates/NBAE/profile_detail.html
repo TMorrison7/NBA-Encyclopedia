@@ -1,0 +1,78 @@
+{% extends 'Encyclopedia/default.html' %}
+{% csrf_token %}
+{% block content %}
+    <style>
+        .btn {
+           background: #17408b
+        }
+        .card-header{
+            background: #17408b;
+        }
+    </style>
+    <div class="row">
+
+    <div class="col-md-7">
+      <div class="card">
+        <h5 class="card-header text-center text-white">Profile</h5>
+
+        <div class="card-body">
+            <div class="image_ava">
+                {% if user.userprofile.image %}
+                    <img src="{{ user.userprofile.image.url }}" class="img-thumbnail rounded mx-auto d-block" alt="avatar">
+                {% endif %}
+            </div>
+          <h4 class="card-title text-center">{{ user.username }}</h4>
+          <!-- ↓ Redes ↓ -->
+          <div class="paneles-usuario">
+            <div class="bloques bgf">
+              {% if user.userprofile.first_name == None %}
+                  <h6>First Name: </h6>
+                {% else %}
+                  <h6><b>First Name:</b> {{ user.userprofile.first_name }}</h6>
+                {% endif %}
+            </div>
+            <div class="bloques bgt">
+                  {% if user.userprofile.last_name == None %}
+                      <h6><b>Last Name:</b> </h6>
+                    {% else %}
+                      <h6><b>Last Name:</b> {{ user.userprofile.last_name }}</h6>
+                    {% endif %}
+
+            </div>
+            <div class="bloques bgg">
+              {% if user.userprofile.age == None %}
+                  <h6><b>Age:</b> </h6>
+                    {% else %}
+                  <h6><b>Age:</b> {{ user.userprofile.age }}</h6>
+                {% endif %}
+            </div>
+            <div class="bloques bgg">
+              {% if user.userprofile.hometown == None %}
+                  <h6><b>Hometown:</b> </h6>
+                {% else %}
+                  <h6><b>Hometown:</b> {{ user.userprofile.hometown }}</h6>
+                {% endif %}
+            </div>
+            <div class="bloques bgg">
+                  {% if user.userprofile.bio == None %}
+                      <h6><b>Bio:</b> </h6>
+                    {% else %}
+                      <h6><b>Bio:</b> {{ user.userprofile.bio }}</h6>
+                    {% endif %}
+            </div>
+                <a class="btn text-light" href="{% url 'NBAE:profile_edit'%}"><span class="fa fa-edit"></span></a>
+          </div>
+          <!-- ↑ Redes ↑ -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+  <hr>
+
+  <div class="container">
+</div>
+
+{% endblock %}

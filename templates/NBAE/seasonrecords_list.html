@@ -1,0 +1,13 @@
+{% extends 'Encyclopedia/default.html' %}
+{% block content %}
+<div class="centerstage">
+
+
+    {% for seasonrecords in seasonrecords_list %}
+        <h1><a href="{% url 'NBAE:seasonrecord_detail' pk=seasonrecords.pk %}">{{ seasonrecords.team_name }}</a></h1>
+            <div class="date">
+                <p>Published on: {{ teamrecords.published_date|date:"D M Y"}}</p>
+            </div>
+    {% endfor %}
+</div>
+{% endblock %}

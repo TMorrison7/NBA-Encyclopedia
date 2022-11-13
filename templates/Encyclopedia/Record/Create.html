@@ -1,0 +1,86 @@
+{% extends 'Encyclopedia/default.html' %}
+
+{% block content %}
+    <section id="team" class="pb-5">
+    <div class="container">
+        <h5 class="section-title h1">Creation Center</h5>
+        <div class="row">
+
+            <!-- Team member -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                    <div class="mainflip">
+                        <div class="frontside">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h1><span class="display-3 fa fa-male"></span></h1>
+                                    <h4 class="card-title">Player</h4>
+                                    <p class="card-text">Player includes descriptions like Current Team, Profile, Player's College, etc. </p>
+                                    <a href="{% url 'NBAE:createplayer' %}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ./Team member -->
+            <!-- Team member -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                    <div class="mainflip">
+                        <div class="frontside">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h1><span class="display-3 fa fa-users"></span></h1>
+                                    <h4 class="card-title">Team</h4>
+                                    <p class="card-text">Team includes descriptions like Coach, Roster, Arena, General Manager, etc.</p>
+                                    <a href="{% url 'NBAE:createteam' %}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ./Team member -->
+            <!-- Team member -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                    <div class="mainflip">
+                        <div class="frontside">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h1><span class="display-3 fa fa-calendar"></span></h1>
+                                    <h4 class="card-title">Season</h4>
+                                    <p class="card-text">Season includes descriptions like MVP, Duration, NBA Champions, etc.</p>
+                                    <a href="{% url 'NBAE:createseason' %}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ./Team member -->
+            <!-- Team member -->
+
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                    <div class="mainflip">
+                        <div class="frontside">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h1><span class="display-3 fa fa-newspaper"></span></h1>
+                                    <h4 class="card-title">Article</h4>
+                                    <p class="card-text">This is basic card with image on top, title, description and button.</p>
+                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ./Team member -->
+
+        </div>
+    </div>
+</section>
+{% endblock %}

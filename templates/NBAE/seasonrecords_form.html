@@ -1,0 +1,26 @@
+{% extends 'Encyclopedia/default.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h1>New Season Record</h1>
+
+    <form method="POST" enctype="multipart/form-data" class="post-form">
+    {% csrf_token %}
+    {{form.name | as_crispy_field}}
+    {{form.season_league | as_crispy_field}}
+    {{form.season_duration | as_crispy_field}}
+    {{form.season_not | as_crispy_field}}
+    {{form.season_allteams | as_crispy_field}}
+    {{form.season_mvp | as_crispy_field}}
+    {{form.season_roy | as_crispy_field}}
+    {{form.season_doy | as_crispy_field}}
+    {{form.season_smoy | as_crispy_field}}
+    {{form.season_champion | as_crispy_field}}
+    {{form.season_fmvp | as_crispy_field}}
+    {{form.season_bio | as_crispy_field}}
+    {{form.image | as_crispy_field }}
+    <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+
+    <script>var editor = new MediumEditor('.editable');</script>
+
+{% endblock %}
